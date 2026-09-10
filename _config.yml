@@ -12,6 +12,13 @@ url: "https://42Sonder.github.io"
 baseurl: ""
 timezone: Asia/Shanghai
 
+# 顶部导航菜单（_includes/header.html 会循环渲染）
+# 新增导航项：建好对应页面后在这里加一行
+nav:
+    - { name: "About Me", url: "/about" }
+    - { name: "My Friends", url: "/friends" }
+    - { name: "Literature", url: "/literature" }
+
 # ============================================================
 # 功能开关
 # ============================================================

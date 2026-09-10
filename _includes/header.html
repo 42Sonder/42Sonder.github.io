@@ -24,9 +24,10 @@
     <h1 class="author-title">{{ site.author_name }}</h1>
     <div class="divider"></div>
     <nav class="author-nav">
-        <a href="/about">About Me</a>
-        <span class="separator">|</span>
-        <a href="/friends">My Friends</a>
+        {% for item in site.nav %}
+        <a href="{{ item.url | prepend: site.baseurl }}">{{ item.name }}</a>
+        {% unless forloop.last %}<span class="separator">|</span>{% endunless %}
+        {% endfor %}
     </nav>
     <div class="divider"></div>
 </div>

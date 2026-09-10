@@ -35,6 +35,7 @@ title: "文章标题"
 date: 2026-09-11 10:00:00 +0800   # 可省略，默认用文件名日期
 description: "一句话摘要，用于搜索结果和分享卡片"
 keywords: "标签一,标签二"
+category: literature               # 可选，文章分类（见下节「分类页」）
 ---
 
 正文用 Markdown 写。图片放在 images/2026-09-11/ 下，正文引用：
@@ -44,6 +45,26 @@ keywords: "标签一,标签二"
 - 文章顶部免责声明：`_config.yml` 的 `disclaimer`（留空不显示，支持 HTML）
 - 数学公式开关：`_config.yml` 的 `mathjax`
 - 示例文章 `_posts/2026-09-10-hello-world.md` 可留作参考或删除
+
+## 分类页
+
+文章通过 front matter 的 `category` 字段归类（如 `category: literature`），对应分类页 `/literature/` 会自动列出该分类的文章（按年份分组，新文章在前）。不带 `category` 的文章只出现在首页。
+
+新增一个分类（以 `tech` 为例）只需两步：
+
+1. 根目录新建 `tech.md`（文件名即页面路径 `/tech/`）：
+
+   ```yaml
+   ---
+   layout: category
+   title: Tech
+   category: tech
+   ---
+   ```
+
+2. `_config.yml` 的 `nav` 列表加一行导航：`- { name: "Tech", url: "/tech" }`
+
+之后写文章时 front matter 里写 `category: tech`，文章就会自动出现在该分类页。
 
 ## 首次使用清单（部署前逐项确认）
 
@@ -97,9 +118,9 @@ Disallow:
 ## 目录结构
 
 ```
-├── _config.yml          # 全站配置（站点信息、功能开关、Giscus）
+├── _config.yml          # 全站配置（站点信息、导航、功能开关、Giscus）
 ├── _posts/              # 文章（文件名 = 日期 + 标题）
-├── _layouts/            # 页面模板（compress / default / post / page）
+├── _layouts/            # 页面模板（compress / default / post / page / category）
 ├── _includes/           # 模板片段（head / header / footer / comments）
 ├── _sass/main.scss      # 样式源码（含自托管字体声明）
 ├── assets/              # 头像、图标、字体、JS
@@ -107,7 +128,7 @@ Disallow:
 ├── images/              # 文章配图（按日期建目录）
 ├── fancybox/            # 图片灯箱库（jQuery 插件）
 ├── index.html           # 首页（分页文章列表）
-├── about.md / friends.md / 404.md
+├── about.md / friends.md / literature.md / 404.md
 ├── feed.xml             # RSS
 └── robots.txt           # 抓取策略（当前禁止收录）
 ```
