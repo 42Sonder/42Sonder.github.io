@@ -1,0 +1,76 @@
+# ============================================================
+# 站点信息 —— 改成你自己的
+# ============================================================
+title: "My Blog"
+description: "我的个人博客：记录、思考与分享。"
+keywords: "个人博客,Jekyll,技术,随笔"
+author_name: "Your Name"
+logo_url: /assets/avatar.jpg
+
+# 站点地址（RSS / canonical / Open Graph 链接会用到它）
+url: "https://42Sonder.github.io"
+baseurl: ""
+timezone: Asia/Shanghai
+
+# ============================================================
+# 功能开关
+# ============================================================
+mathjax: true              # 数学公式：行内 $...$，行间 $$...$$
+future: false              # 未来日期的文章不发布（防止草稿误发）
+copyright_start_year: 2026 # 页脚版权起始年份，自动延伸到当前年份
+
+# 文章顶部自动显示的免责声明（支持 HTML，留空则不显示）
+# 安全类博客示例：
+# disclaimer: "<strong>免责声明</strong><br>本文仅用于技术分享与学习交流，不得用于非法用途。"
+disclaimer: ""
+
+# ============================================================
+# Giscus 评论（基于 GitHub Discussions）
+# repo 留空 = 关闭评论。启用步骤见 README.md
+# ============================================================
+giscus:
+  repo: ""
+  repo_id: ""
+  category: "Announcements"
+  category_id: ""
+  mapping: "pathname"        # 按文章路径关联讨论
+  strict: "0"
+  reactions_enabled: "1"
+  input_position: "bottom"
+  light_theme: "light"       # 浅色模式下评论主题
+  dark_theme: "dark"         # 深色模式下评论主题
+  lang: "zh-CN"
+
+# ============================================================
+# 构建配置（一般无需修改）
+# ============================================================
+highlighter: none           # 代码高亮由前端 highlight.js 完成
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter_opts:
+    disable: true
+sass:
+  style: compressed
+
+paginate: 10
+paginate_path: "index/:num"
+
+include: ["robots.txt"]
+exclude: ["README.md", "vendor", "Gemfile", "Gemfile.lock", "script", ".jekyll-cache"]
+
+plugins:
+  - jekyll-sitemap
+  - jekyll-paginate
+
+defaults:
+  - scope:
+      type: posts
+      path: ""
+    values:
+      layout: "post"
+  - scope:
+      type: pages
+      path: ""
+    values:
+      layout: "page"

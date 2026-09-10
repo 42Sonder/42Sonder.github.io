@@ -1,0 +1,50 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+{% if page.title %}
+	<title>{{ page.title }} · {{ site.title }}</title>
+{% else %}
+	<title>{{ site.title }}</title>
+{% endif %}
+
+{% assign meta_description = page.description | default: page.excerpt | default: site.description | strip_html | strip_newlines | truncate: 160 %}
+<meta name="description" content="{{ meta_description }}">
+<meta name="keywords" content="{{ page.keywords | default: site.keywords }}">
+<meta name="author" content="{{ site.author_name }}">
+
+<!-- Open Graph / 社交分享卡片 -->
+<meta property="og:site_name" content="{{ site.title }}">
+<meta property="og:title" content="{{ page.title | default: site.title }}">
+<meta property="og:description" content="{{ meta_description }}">
+<meta property="og:type" content="{% if page.date %}article{% else %}website{% endif %}">
+<meta property="og:url" content="{{ page.url | prepend: site.baseurl | prepend: site.url }}">
+<meta property="og:image" content="{{ site.logo_url | prepend: site.baseurl | absolute_url }}">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="{{ page.title | default: site.title }}">
+<meta name="twitter:description" content="{{ meta_description }}">
+<meta name="twitter:image" content="{{ site.logo_url | prepend: site.baseurl | absolute_url }}">
+
+<link rel="icon" href="{{ "/assets/favicon.jpeg" | prepend: site.baseurl }}">
+<link rel="apple-touch-icon" href="{{ "/assets/touch-icon.jpeg" | prepend: site.baseurl }}">
+<link rel="stylesheet" href="{{ "/assets/css/highlight/github.min.css" | prepend: site.baseurl }}" id="highlight-light">
+<link rel="stylesheet" href="{{ "/assets/css/highlight/github-dark.min.css" | prepend: site.baseurl }}" id="highlight-dark" disabled>
+<link rel="stylesheet" href="{{ "/fancybox/source/jquery.fancybox.css" | prepend: site.baseurl }}">
+<link rel="stylesheet" href="{{ "/assets/core.css" | prepend: site.baseurl }}">
+<link rel="canonical" href="{{ page.url | prepend: site.baseurl | prepend: site.url }}">
+<link rel="alternate" type="application/atom+xml" title="{{ site.title }}" href="{{ "/feed.xml" | prepend: site.url }}" />
+
+{% if site.mathjax %}
+<!-- MathJax v3：行内 $...$，行间 $$...$$（配置开关见 _config.yml） -->
+<script>
+	window.MathJax = {
+		tex: {
+			inlineMath: [["$", "$"], ["\\(", "\\)"]],
+			displayMath: [["$$", "$$"], ["\\[", "\\]"]]
+		},
+		options: {
+			skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"]
+		}
+	};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+{% endif %}

@@ -1,0 +1,32 @@
+<div class="footer">
+	{% assign current_year = site.time | date: '%Y' %}
+	{% assign start_year = site.copyright_start_year | default: current_year %}
+	<span class="block">&lt;/&gt; Copyright &copy; {{ site.title }}{% if start_year != current_year %} {{ start_year }}&ndash;{% endif %} {{ current_year }}</span>
+</div>
+<script src="/fancybox/lib/jquery-1.10.2.min.js"></script>
+<script src="/assets/js/toc.js"></script>
+<script src="/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+<script src="/assets/js/pangu/pangu.umd.js"></script>
+<script>
+	document.addEventListener("DOMContentLoaded", () => {
+		const proseElement = document.querySelector(".prose");
+		if (proseElement) {
+			pangu.spacingNode(proseElement);
+		}
+	});
+</script>
+<script>
+	// 图片灯箱：点击文章图片放大查看
+	$(document).ready(function () {
+		$("article img").each(function () {
+			// 已经被 <a> 包裹的图片（作者自定义链接）不重复处理
+			if (!$(this).parent().is("a")) {
+				$(this).wrap($("<a>").addClass("image-link").attr("href", this.src));
+			}
+		});
+		$("a.image-link").fancybox({
+			openEffect: "elastic",
+			closeEffect: "elastic",
+		});
+	});
+</script>

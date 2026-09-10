@@ -1,0 +1,8 @@
+---
+layout: null
+---
+
+# 当前策略：全站禁止搜索引擎抓取（低调模式）
+# 想放开收录时，把下面的 "Disallow: /" 改为 "Disallow:"（冒号后留空）
+User-agent: *
+Disallow: /
