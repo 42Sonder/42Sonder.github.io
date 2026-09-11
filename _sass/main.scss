@@ -654,7 +654,16 @@ section {
   font-size: 12px;
 }
 
-.friends-grid {
+.favorites-section {
+  margin-top: 30px;
+
+  h2 {
+    margin: 0 0 4px;
+    font-size: 1.1rem;
+  }
+}
+
+.favorites-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
   gap: 10px;
@@ -662,7 +671,7 @@ section {
   padding: 0;
 }
 
-.friend-card {
+.favorite-card {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -695,6 +704,6 @@ section {
   }
 }
 
-[data-theme="dark"] .friend-card:hover {
+[data-theme="dark"] .favorite-card:hover {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }

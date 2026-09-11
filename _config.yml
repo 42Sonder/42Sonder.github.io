@@ -3,7 +3,7 @@
 # ============================================================
 title: "Sonder"
 description: "Sonder 的个人博客：记录、思考与分享。"
-keywords: "个人博客,Jekyll,技术,随笔"
+keywords: "个人博客,技术,随笔"
 author_name: "42Sonder"
 logo_url: /assets/avatar.jpg
 
@@ -15,9 +15,9 @@ timezone: Asia/Shanghai
 # 顶部导航菜单（_includes/header.html 会循环渲染）
 # 新增导航项：建好对应页面后在这里加一行
 nav:
-    - { name: "About Me", url: "/about" }
-    - { name: "My Friends", url: "/friends" }
     - { name: "Literature", url: "/literature" }
+    - { name: "Favorites", url: "/favorites" }
+    - { name: "About Me", url: "/about" }
 
 # ============================================================
 # 功能开关

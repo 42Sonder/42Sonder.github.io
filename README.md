@@ -73,7 +73,7 @@ category: literature               # 可选，文章分类（见下节「分类�
 - [ ] `assets/avatar.jpg`：换成你的头像（建议 ≤ 200KB）
 - [ ] `assets/favicon.jpeg`、`assets/touch-icon.jpeg`：换成你的站点图标
 - [ ] `about.md`：自我介绍
-- [ ] `friends.md`：友链（或删掉后在 `_includes/header.html` 中去掉导航入口）
+- [ ] `favorites.md`：收藏页（保存常访问网址；不需要可删掉后在 `_includes/header.html` 中去掉导航入口）
 - [ ] 删除或改写示例文章 `_posts/2026-09-10-hello-world.md`
 
 ## 部署到 GitHub Pages
@@ -128,7 +128,7 @@ Disallow:
 ├── images/              # 文章配图（按日期建目录）
 ├── fancybox/            # 图片灯箱库（jQuery 插件）
 ├── index.html           # 首页（分页文章列表）
-├── about.md / friends.md / literature.md / 404.md
+├── about.md / favorites.md / literature.md / 404.md
 ├── feed.xml             # RSS
 └── robots.txt           # 抓取策略（当前禁止收录）
 ```
