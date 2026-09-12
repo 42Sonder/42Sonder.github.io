@@ -36,11 +36,40 @@ date: 2026-09-11 10:00:00 +0800   # 可省略，默认用文件名日期
 description: "一句话摘要，用于搜索结果和分享卡片"
 keywords: "标签一,标签二"
 category: literature               # 可选，文章分类（见下节「分类页」）
+typora-copy-images-to: ../images/2026-09-11-文章标题
 ---
 
-正文用 Markdown 写。图片放在 images/2026-09-11/ 下，正文引用：
-![说明文字](/images/2026-09-11/xxx.png)
+正文用 Markdown 写。图片放在 `images/日期-文章标题/` 下，正文引用：
+![说明文字](/images/2026-09-11-文章标题/xxx.png)
 ```
+
+### 使用 Typora 插入图片
+
+每篇文章在 YAML Front Matter 中加入 `typora-copy-images-to`，Typora
+即可在拖放或粘贴图片时自动将图片复制到指定目录。该路径相对于文章所在的
+`_posts/` 目录，因此 `../images/...` 指向项目根目录下的 `images/`。
+
+建议使用“日期 + 文章标题”作为目录名，方便根据文章快速查找对应图片：
+
+```yaml
+typora-copy-images-to: ../images/2026-09-11-文章标题
+```
+
+在 Typora 中还需要开启 **偏好设置 → 图像 → 插入图片时允许复制图片到指定文件夹**。
+也可以通过 **格式 → 图像 → 插入本地图片时 → 复制图片到文件夹**，让 Typora
+自动把 `typora-copy-images-to` 写入当前文章的 Front Matter。
+
+如果 Markdown 中使用网站根路径（推荐）：
+
+```markdown
+![说明文字](/images/2026-09-11-文章标题/xxx.png)
+```
+
+可在 Typora 中通过 **格式 → 图像 → 使用图片根路径** 设置本地预览根目录。
+该设置会写入 `typora-root-url`，其值是本机项目路径，不应在不同电脑之间照搬。
+
+Typora 不会根据 `date` 字段自动生成目录名，需要在每篇新文章中设置一次
+`typora-copy-images-to`；已有图片目录无需迁移。
 
 - 文章顶部免责声明：`_config.yml` 的 `disclaimer`（留空不显示，支持 HTML）
 - 数学公式开关：`_config.yml` 的 `mathjax`
