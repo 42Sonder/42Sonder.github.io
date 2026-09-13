@@ -1,0 +1,27 @@
+# Markdown rules for this Jekyll site.
+[global]
+flavor = "kramdown"
+include = ["**/*.md", "**/*.markdown"]
+exclude = ["_site", "vendor", "node_modules"]
+respect-gitignore = true
+extend-enable = ["MD060", "MD072", "MD084", "MD089"]
+
+# The site deliberately uses HTML in pages such as favorites.md. Long Chinese
+# prose also should not be reflowed merely to meet an arbitrary column limit.
+disable = ["MD013", "MD033"]
+
+# Keep tables legible in source files and catch suspicious invisible Unicode
+# or missing CJK/Latin spacing.
+[MD060]
+style = "aligned"
+
+# Use Jekyll's semantic metadata order instead of an arbitrary alphabetic one.
+# Frontmatter without a field remains valid, so pages and posts can differ.
+[MD072]
+enabled = true
+key-order = ["layout", "title", "date", "description", "keywords", "category", "typora-copy-images-to", "typora-root-url"]
+
+# Jekyll resolves links beginning with / from the site root. Validate them
+# against this repository instead of silently skipping them.
+[MD057]
+absolute-links = "relative_to_roots"

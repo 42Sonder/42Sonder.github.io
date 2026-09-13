@@ -25,6 +25,40 @@ bundle exec jekyll serve
 
 打开 <http://127.0.0.1:4000>。修改文件后浏览器会自动刷新。
 
+## Markdown 格式化
+
+本仓库使用 [rumdl](https://github.com/rvben/rumdl) 检查和格式化 Markdown。
+macOS 上首次使用时安装：
+
+```bash
+brew install rumdl
+```
+
+写完文章后运行：
+
+```bash
+make markdown-format       # 自动修复可修复的格式问题
+make markdown-check        # 检查仍需手动处理的问题
+make markdown-format-check # 仅检查是否需要格式化，适合 CI
+```
+
+`rumdl` 会读取仓库根目录的 `.rumdl.toml`。该配置使用 Jekyll 的 Kramdown
+方言，并允许页面中用于布局的 HTML；它不会为了固定行宽改写中文段落。格式化还会
+对齐表格、检查隐藏字符，并在中英文或数字相邻时补充空格。
+
+Typora 不支持将 rumdl 设为保存时格式化器。完成一篇文章后，在仓库根目录运行
+`make markdown-format`，然后切回 Typora 并重新加载发生外部变更的文件。
+
+首次启用提交前格式化：
+
+```bash
+brew install pre-commit
+pre-commit install
+```
+
+之后每次 `git commit` 会格式化暂存的 Markdown；若文件被改动，提交会停止一次。
+重新执行 `git add` 后再次提交即可。GitHub Actions 也会运行相同的格式检查。
+
 ## 写文章
 
 在 `_posts/` 新建 `YYYY-MM-DD-文章名.md`（日期即发布日期）：
@@ -134,19 +168,19 @@ Typora 不会根据 `date` 字段自动生成目录名，需要在每篇新文�
 
 当前 `robots.txt` 为全站禁止抓取（低调模式）。若想被 Google / 百度收录，把：
 
-```
+```text
 Disallow: /
 ```
 
 改为（冒号后留空）：
 
-```
+```text
 Disallow:
 ```
 
 ## 目录结构
 
-```
+```text
 ├── _config.yml          # 全站配置（站点信息、导航、功能开关、Giscus）
 ├── _posts/              # 文章（文件名 = 日期 + 标题）
 ├── _layouts/            # 页面模板（compress / default / post / page / category）

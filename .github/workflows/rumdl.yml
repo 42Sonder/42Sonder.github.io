@@ -1,0 +1,15 @@
+name: Markdown formatting
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  rumdl-format-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: rvben/rumdl@v0
+        with:
+          command: fmt-check
+          config: .rumdl.toml
