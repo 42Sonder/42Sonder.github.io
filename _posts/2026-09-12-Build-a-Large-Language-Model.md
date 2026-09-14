@@ -48,8 +48,101 @@ $$
 > 动态嵌入的优势：与 Word2Vec 不同，LLM 中的嵌入随任务和数据联合优化。
 > The advantage of optimizing the embeddings as part of the LLM training instead of using Word2Vec is that the embeddings are optimized to the specific task and data at hand. 动态编码，每次可以根据输入动态变化 embedding
 
+### Tokenizer
+
+- Encode 将连续的文本序列切分为具有独立语义的基本单元 token，根据词表将 token 转换位 token IDs。
+- Decode 将 token IDs 转换为 token，进而转换为自然文本
+
+### Embedding Layer
+
+![image-20260914200821568](/images/2026-09-12/image-20260914200821568.png)
+
+> the embddding layer is essentially a lookup operation that retrieves rows from the embedding layer’s weight matrix via a token ID.
+
+> [!TIP]
+>
+> (Old View)Standard Attention modules cannot capture input sequence order—they cannot distinguish tokens at different positions.
+> 初始情况下，每个向量只能编码单个 token 的信息，没有上下文信息。
+
+### Position embeddings
+
+- Absolute Position Encoding
+  - **固定正余弦编码 (Fixed Sinusoidal Positional Encoding)**：As the sequence length increases, the frequency of the sinusoidal functions used in the positional embeddings becomes too high, resulting in very short periods. This can lead to inadequate representation of long-range dependencies and difficulties in capturing fine-grained positional information.随着序列长度的增加，位置嵌入中使用的正弦函数频率变得过高，导致周期非常短。这可能导致对长距离依赖关系的表征不足，以及捕捉细粒度位置信息的困难
+  - **可学习的位置编码 (Learned Positional Encoding)**：外推性差，输入的长度受限
+- Relative Position Encoding
+
+#### Rotary Position Embedding (RoPE)
+
+![image-20260914202335959](/images/2026-09-12/image-20260914202335959.png)
+
+Instead of adding positional information to word embeddings, RoPE rotates **Query** and **Key** vectors through complex multiplication during attention computation.
+
+- for 2D vector $\mathbf x=[x_1,x_2]$, rotation by angle $\theta$ is
+$$
+R_\theta=\begin{bmatrix}\cos\theta&-\sin\theta\\\sin\theta&\cos\theta\end{bmatrix}
+$$
+- for position $m$ and head dimension index $i$, we rotate by $m\theta_i$
+$$
+R_{m\theta}\mathbf x=\begin{bmatrix}x_1\cos(m\theta_i)-x_2\sin(m\theta_i)\\x_2\sin(m\theta_i)+x_2\cos(m\theta_i)\end{bmatrix}
+$$
+- in practice rather than constructing the full rotation matrix, we do element-wise multiplications
+$$
+\begin{bmatrix} x_1\\x_2\end{bmatrix}\odot\begin{bmatrix}\cos(m\theta)\\\cos(m\theta)\end{bmatrix}+\begin{bmatrix} -x_2\\x_1\end{bmatrix}\odot\begin{bmatrix}\sin(m\theta)\\\sin(m\theta)\end{bmatrix}
+$$
+
+RoPE uses multiple rotation speeds to capture positional information at different scales:3ec
+
+- **Fast rotations**: Good for nearby words (short-range dependencies)
+- **Slow rotations**: Good for distant words (long-range dependencies)
+
+处理长度外推（train short, test long）：
+
+- Positional Interpolation
+- NTK-aware scaling
+
+  ==RoPE does not require learned parameters.==
+
 ## Attention Mechanisms
+
+### Self-Attention
+
+### Multi-Head Self-Attention(MHA)
+
+### KV-Cache
+
+### Linear Attention
+
+- DeltaNet
+
+### Flash Attention
 
 ## LLM Architecture
 
 ![Decoder Only](/images/2026-09-12/attention-block-step.png)
+
+> [!CAUTION]
+>
+> Attention：跨 token 混合信息
+> FFN：token 内逐位置特征变换
+
+### Layer Normalisation
+
+**LayerNorm vs BatchNorm**
+
+| 维度            | BatchNorm              | LayerNorm              |
+| --------------- | ---------------------- | ---------------------- |
+| 归一化方向      | batch 维度             | 特征维度               |
+| 计算对象        | 同特征跨样本的均值方差 | 同样本跨特征的均值方差 |
+| 依赖 batch size | 是                     | 否                     |
+
+NLP 中序列长度不一，batch 统计不稳定，故用 LayerNorm。
+
+- **RMSNorm**：简化计算，保证性能同时提升训练效率。（减少 Data Movement—从内存到计算单元的传输）
+
+> Remove Bias. 同上，带来的收益通常不够大，不太值得增加额外的参数和计算
+
+### Feed Forward Network
+
+![GLU](/images/2026-09-12/3708248-20260604154026475-843143348.png)
+
+![SwiGLU](/images/2026-09-12/3708248-20260604154944486-1310019537.png)
