@@ -34,6 +34,8 @@ $$
 
 ## Embedding
 
+![From Token to Embedding](/images/2026-09-12/1*Gq5l6pPP3bvcBfUgPVxcHA.png)
+
 将非数值数据（文本、图像、视频、音频）映射到连续向量空间。
 
 | 方法     | 问题                                   |
@@ -105,6 +107,14 @@ RoPE uses multiple rotation speeds to capture positional information at differen
 ## Attention Mechanisms
 
 ### Self-Attention
+
+[Attention Is All You Need](https://arxiv.org/abs/1706.03762)
+
+[Efficient Transformers: A Survey](https://arxiv.org/abs/2009.06732)
+
+[A Survey on Efficient Training of Transformers](https://arxiv.org/abs/2302.01107)
+
+![Self attention from scratch summary](/images/2026-09-12/summary.webp)
 
 ### Multi-Head Self-Attention(MHA)
 
