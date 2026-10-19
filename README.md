@@ -61,7 +61,31 @@ pre-commit install
 
 ## 写文章
 
-在 `_posts/` 新建 `YYYY-MM-DD-文章名.md`（日期即发布日期）：
+在 `_posts/` 新建 `YYYY-MM-DD-文章名.md`（日期即发布日期）。也可以直接运行：
+
+```bash
+make new-post
+```
+
+该命令会根据上海时区的当天日期生成 `_posts/YYYY-MM-DD-draft.md`，并填入当前时间、空标题、空摘要、空关键词和当天的 Typora 图片目录。它不会覆盖当天已有的草稿；完成文章后，请把文件名中的 `draft` 改成文章名或 slug。
+
+生成的模板如下：
+
+```yaml
+---
+title: ""
+date: 2026-09-11 10:00:00 +0800
+description: ""
+keywords: ""
+typora-copy-images-to: ../images/2026-09-11
+---
+
+## 文章内容
+
+<!-- 在这里开始写作。 -->
+```
+
+也可以手动创建并按需补充字段：
 
 ```yaml
 ---
